@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #f5f5f5;
+    }
+        nav {
+            background: black;
+            padding: 15px 0;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .error {
+            color: #d9534f;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/login">Вход</a></li>
+        <li><a href="/register">Регистрация</a></li>
+    </ul>
+</nav>
+
+<div class="content">
+    <h1>Регистрация</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div>
+            <label>Имя пользователя:</label>
+            {{ form.username() }}
+            {% if form.username.errors %}
+            {% for error in form.username.errors %}
+            <div class="error">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div>
+            <label>Пароль:</label>
+            {{ form.password() }}
+        </div>
+
+        <div>
+            <label>Подтвердите пароль:</label>
+            {{ form.confirm_password() }}
+            {% if form.confirm_password.errors %}
+            <div class="error">{{ form.confirm_password.errors[0] }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+</div>
+</body>
+</html>
